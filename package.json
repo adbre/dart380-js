@@ -1,5 +1,5 @@
 {
-  "name": "dart380",
+  "name": "dart380-js",
   "version": "0.1.0",
   "description": "A ",
   "main": "index.js",
@@ -44,10 +44,7 @@
   "dependencies": {
     "didi": "^0.1.1",
     "inherits": "^2.0.1",
-    "jquery": "^3.0.0",
-    "knockout": "^3.4.0",
     "lodash": "^4.13.1",
-    "signalr": "^2.2.1",
     "sprintf-js": "^1.0.3"
   }
 }
