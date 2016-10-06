@@ -118,6 +118,12 @@ describe("EKV", function() {
             expect(largeDisplay.toString()).toBe('KVITTENS:154012*');
 
             keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('                ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('                ');
+
+            keyboard.trigger('⏎');
             expect(largeDisplay.toString()).toBe('------SLUT------');
 
             keyboard.trigger('SND');
