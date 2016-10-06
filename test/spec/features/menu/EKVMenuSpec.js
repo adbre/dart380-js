@@ -2,9 +2,16 @@
 
 require('../../../TestHelper');
 
+var MockCommunication = require('../../../util/MockCommunication');
+
 describe("EKV", function() {
 
-    beforeEach(bootstrapDart380());
+    beforeEach(bootstrapDart380({ modules: [
+        {
+            __init__: ['mockCommunication'],
+            mockCommunication: ['type', MockCommunication]
+        }
+    ]}));
 
     beforeEach(inject(function(mod, selfTest, eventBus) {
         var isReady = false;
@@ -71,6 +78,64 @@ describe("EKV", function() {
 
             // then
             expect(largeDisplay.toString()).toBe('   (MOTTAGNA)   ');
+            expect(smallDisplay.toString()).toBe('        ');
+        }));
+
+        it("should create receipt with KVI", inject(function (keyboard, largeDisplay, smallDisplay) {
+            // when
+            keyboard.trigger('EKV');
+            keyboard.trigger('KVI');
+
+            // then
+            expect(largeDisplay.toString()).toBe('KVITTENS*       ');
+            expect(smallDisplay.toString()).toBe('KVITTENS');
+        }));
+
+        it("should create and show receipt with KVI", inject(function (keyboard, largeDisplay, smallDisplay) {
+            // when
+            keyboard.trigger('EKV');
+            keyboard.trigger('KVI');
+
+            expect(largeDisplay.toString()).toBe('KVITTENS*       ');
+            expect(smallDisplay.toString()).toBe('KVITTENS');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('TILL:RG         ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('                ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('                ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('FRÅN:     *U:   ');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('KVITTENS:154012*');
+
+            keyboard.trigger('⏎');
+            expect(largeDisplay.toString()).toBe('------SLUT------');
+
+            keyboard.trigger('SND');
+            expect(largeDisplay.toString()).toBe('     SÄNDER     ');
+        }));
+
+        it("should send receipt", inject(function (keyboard, largeDisplay, smallDisplay, mockCommunication) {
+            // when
+            keyboard.trigger('EKV');
+            keyboard.trigger('KVI');
+            keyboard.trigger('SND');
+
+            expect(largeDisplay.toString()).toBe('     SÄNDER     ');
+            mockCommunication.mostRecent().complete();
+            expect(largeDisplay.toString()).toBe('      SÄNT      ');
+
+            keyboard.trigger('SLT');
+            expect(largeDisplay.toString()).toBe('                ');
             expect(smallDisplay.toString()).toBe('        ');
         }));
 
