@@ -81,6 +81,16 @@ describe("EKV", function() {
             expect(smallDisplay.toString()).toBe('        ');
         }));
 
+        it("should create repeat message with REP", inject(function (keyboard, largeDisplay, smallDisplay) {
+            // when
+            keyboard.trigger('EKV');
+            keyboard.trigger('REP');
+
+            // then
+            expect(largeDisplay.toString()).toBe('REPETERA*       ');
+            expect(smallDisplay.toString()).toBe('REPETERA');
+        }));
+
         it("should create receipt with KVI", inject(function (keyboard, largeDisplay, smallDisplay) {
             // when
             keyboard.trigger('EKV');
