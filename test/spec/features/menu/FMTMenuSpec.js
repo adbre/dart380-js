@@ -1,6 +1,6 @@
 'use strict';
 
-require('../TestHelper');
+require('../../../TestHelper');
 
 describe("FMT", function() {
 
@@ -24,6 +24,18 @@ describe("FMT", function() {
         expect(smallDisplay.toString()).toBe('ROT*NIVÅ');
         expect(largeDisplay.getCursor()).toBe(7);
         expect(smallDisplay.getCursor()).toBe(-1);
+    }));
+
+    it("should cancel message format selection", inject(function (keyboard, largeDisplay, smallDisplay) {
+        // given
+        keyboard.trigger('FMT');
+
+        // when
+        keyboard.trigger('SLT');
+
+        // then
+        expect(largeDisplay.toString()).toBe('                ');
+        expect(smallDisplay.toString()).toBe('        ');
     }));
 
     // DART 380 Instruktionsbok Utdrag, sida 25
