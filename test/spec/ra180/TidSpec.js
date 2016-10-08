@@ -93,11 +93,6 @@ describe('Tid', function () {
                 expect(smallDisplay.get()).toBe('T:');
             }));
 
-            it('should flash colon-character', inject(function(smallDisplay) {
-                // then
-                expect(smallDisplay.getBlinking()).toBe(1);
-            }));
-
             it('should show cursor', inject(function(smallDisplay) {
                 // then
                 expect(smallDisplay.getCursor()).toBe(2);
@@ -647,50 +642,27 @@ describe('Tid', function () {
             keyboard.trigger('1');
             keyboard.trigger('ÄND');
             expect(smallDisplay.toString()).toBe("T:      ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[2].cursor).toBe(true);
 
             keyboard.trigger('2');
             expect(smallDisplay.toString()).toBe("T:2     ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[2].cursor).toBe(false);
-            expect(smallDisplay.characters[3].cursor).toBe(true);
 
             keyboard.trigger('0');
             expect(smallDisplay.toString()).toBe("T:20    ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[3].cursor).toBe(false);
-            expect(smallDisplay.characters[4].cursor).toBe(true);
 
             keyboard.trigger('3');
             expect(smallDisplay.toString()).toBe("T:203   ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[4].cursor).toBe(false);
-            expect(smallDisplay.characters[5].cursor).toBe(true);
 
             keyboard.trigger('4');
             expect(smallDisplay.toString()).toBe("T:2034  ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[5].cursor).toBe(false);
-            expect(smallDisplay.characters[6].cursor).toBe(true);
 
             keyboard.trigger('5');
             expect(smallDisplay.toString()).toBe("T:20345 ");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[6].cursor).toBe(false);
-            expect(smallDisplay.characters[7].cursor).toBe(true);
 
             keyboard.trigger('6');
             expect(smallDisplay.toString()).toBe("T:203456");
-            expect(smallDisplay.characters[1].blinking).toBe(true);
-            expect(smallDisplay.characters[7].blinking).toBe(true);
-            expect(smallDisplay.characters[7].cursor).toBe(true);
 
             keyboard.trigger('⏎');
             expect(smallDisplay.toString()).toBe("T:203456");
-            expect(smallDisplay.characters[1].blinking).toBe(false);
-            expect(smallDisplay.characters[7].blinking).toBe(false);
-            expect(smallDisplay.characters[7].cursor).toBe(false);
         }));
 
         it("should persist T", inject(function (keyboard, smallDisplay) {
@@ -723,38 +695,21 @@ describe('Tid', function () {
             keyboard.trigger('⏎');
             keyboard.trigger('ÄND');
             expect(smallDisplay.toString()).toBe("DAT:    ");
-            expect(smallDisplay.characters[3].blinking).toBe(true);
-            expect(smallDisplay.characters[4].cursor).toBe(true);
 
             keyboard.trigger('0');
             expect(smallDisplay.toString()).toBe("DAT:0   ");
-            expect(smallDisplay.characters[3].blinking).toBe(true);
-            expect(smallDisplay.characters[4].cursor).toBe(false);
-            expect(smallDisplay.characters[5].cursor).toBe(true);
 
             keyboard.trigger('9');
             expect(smallDisplay.toString()).toBe("DAT:09  ");
-            expect(smallDisplay.characters[3].blinking).toBe(true);
-            expect(smallDisplay.characters[5].cursor).toBe(false);
-            expect(smallDisplay.characters[6].cursor).toBe(true);
 
             keyboard.trigger('2');
             expect(smallDisplay.toString()).toBe("DAT:092 ");
-            expect(smallDisplay.characters[3].blinking).toBe(true);
-            expect(smallDisplay.characters[6].cursor).toBe(false);
-            expect(smallDisplay.characters[7].cursor).toBe(true);
 
             keyboard.trigger('8');
             expect(smallDisplay.toString()).toBe("DAT:0928");
-            expect(smallDisplay.characters[3].blinking).toBe(true);
-            expect(smallDisplay.characters[6].cursor).toBe(false);
-            expect(smallDisplay.characters[7].cursor).toBe(true);
 
             keyboard.trigger('⏎');
             expect(smallDisplay.toString()).toBe("DAT:0928");
-            expect(smallDisplay.characters[3].blinking).toBe(false);
-            expect(smallDisplay.characters[7].blinking).toBe(false);
-            expect(smallDisplay.characters[7].cursor).toBe(false);
         }));
 
         it("should abort input of DAT", inject(function (keyboard, smallDisplay) {
