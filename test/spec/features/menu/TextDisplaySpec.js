@@ -96,4 +96,161 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
             }));
         });
     });
+
+    describe('Tändning och släckning', function () {
+        describe('vid inmatning', function () {
+            beforeEach(inject(function (keyboard) {
+                keyboard.trigger('4');
+                keyboard.trigger('ÄND');
+            }));
+
+            it('släcks INTE teckenfönstret efter 59 s', inject(function (keyboard, smallDisplay) {
+                // when
+                jasmine.clock().tick(59 * 1000);
+
+                // then
+                expect(smallDisplay.toString().trim()).not.toEqual('');
+            }));
+
+            it('släcks teckenfönstret efter 60 s', inject(function (keyboard, smallDisplay) {
+                // when
+                jasmine.clock().tick(60 * 1000);
+
+                // then
+                expect(smallDisplay.toString().trim()).toEqual('');
+            }));
+
+            it('släcks INTE teckenfönstret efter 59 s efter senaste inmatning', inject(function (keyboard, smallDisplay) {
+                // when
+                jasmine.clock().tick(30 * 1000);
+                keyboard.trigger('0');
+                jasmine.clock().tick(59 * 1000);
+
+                // then
+                expect(smallDisplay.toString().trim()).not.toEqual('');
+            }));
+
+            it('släcks teckenfönstret efter 60 s efter senaste inmatning', inject(function (keyboard, smallDisplay) {
+                // when
+                jasmine.clock().tick(30 * 1000);
+                keyboard.trigger('0');
+                jasmine.clock().tick(60 * 1000);
+
+                // then
+                expect(smallDisplay.toString().trim()).toEqual('');
+            }));
+
+            it('obekräftade tecken raderas efter 60 + 5 s', inject(function (keyboard, smallDisplay) {
+                // given
+                keyboard.triggerMany('45123');
+
+                // when
+                jasmine.clock().tick(65 * 1000);
+
+                // then
+                keyboard.trigger('4');
+                expect(smallDisplay.toString().trim()).toEqual('FR:30025');
+            }));
+
+            it('tänds teckenfönstret om valfri tangent trycks inom ytterliggare 5 s efter nedsläckning', inject(function (keyboard, smallDisplay) {
+                // when
+                jasmine.clock().tick(60 * 1000);
+                jasmine.clock().tick(4 * 1000);
+                keyboard.trigger('0');
+
+                // then
+                expect(smallDisplay.toString().trim()).toEqual('FR:');
+            }));
+
+            it('avslutas funktionen efter ytterliggare 5 s', inject(function (keyboard, menu) {
+                // when
+                jasmine.clock().tick(60 * 1000);
+                jasmine.clock().tick(5 * 1000);
+
+                // then
+                expect(menu.isOpenChild()).toBe(false);
+            }));
+        });
+
+        describe('vid avläsning', function () {
+            describe('enradiga funktioner', function () {
+                beforeEach(inject(function (keyboard) {
+                    keyboard.trigger('4');
+                }));
+
+                it('släcks teckenfönstret efter 30 s', inject(function (keyboard, smallDisplay) {
+                    // when
+                    jasmine.clock().tick(30 * 1000);
+
+                    // then
+                    expect(smallDisplay.toString().trim()).toEqual('');
+                }));
+
+                it('släcks INTE teckenfönstret efter 29 s', inject(function (keyboard, smallDisplay) {
+                    // when
+                    jasmine.clock().tick(29 * 1000);
+
+                    // then
+                    expect(smallDisplay.toString().trim()).not.toEqual('');
+                }));
+
+                it('avslutas funktionen efter 30 s', inject(function (keyboard, menu) {
+                    // when
+                    jasmine.clock().tick(30 * 1000);
+
+                    // then
+                    expect(menu.isOpenChild()).toBe(false);
+                }));
+            });
+
+            describe('flerradiga funktioner', function () {
+                beforeEach(inject(function (keyboard) {
+                    keyboard.trigger('FMT');
+                    keyboard.triggerMany('100');
+                    keyboard.trigger('⏎');
+                    keyboard.trigger('SLT');
+
+                    keyboard.trigger('ISK');
+                }));
+
+                it('släcks teckenfönstret efter 30 s', inject(function (keyboard, smallDisplay, largeDisplay) {
+                    // when
+                    jasmine.clock().tick(30 * 1000);
+
+                    // then
+                    expect(largeDisplay.toString().trim()).toEqual('');
+                    expect(smallDisplay.toString().trim()).toEqual('');
+                }));
+
+                it('släcks INTE teckenfönstret efter 29 s', inject(function (keyboard, smallDisplay, largeDisplay) {
+                    // when
+                    jasmine.clock().tick(29 * 1000);
+
+                    // then
+                    expect(largeDisplay.toString().trim()).not.toEqual('');
+                    expect(smallDisplay.toString().trim()).not.toEqual('');
+                }));
+
+                it('avslutas INTE funktionen om tangent trycks inom 5 s efter nedsläckning', inject(function (keyboard, smallDisplay, largeDisplay) {
+                    // when
+                    jasmine.clock().tick(30 * 1000);
+                    jasmine.clock().tick(4 * 1000);
+                    keyboard.trigger('0');
+
+                    // then
+                    expect(largeDisplay.toString()).toEqual('000000*FR:      ');
+                    expect(smallDisplay.toString()).toEqual('FRI*TEXT');
+                }));
+
+                it('avslutas funktionen med 5 s fördröjning efter 30 s', inject(function (keyboard, menu) {
+                    // when
+                    jasmine.clock().tick(30 * 1000);
+                    jasmine.clock().tick(5 * 1000);
+
+                    // then
+                    expect(menu.isOpenChild()).toBe(false);
+                }));
+            });
+        });
+    });
 });

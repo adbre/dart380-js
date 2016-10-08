@@ -58,30 +58,6 @@ describe('Tid', function () {
             expect(smallDisplay.get()).toBe('T:000000');
         }));
 
-        it('should elapse grovtid as time passes', inject(function(smallDisplay) {
-            // when
-            jasmine.clock().tick(1000);
-
-            // then
-            expect(smallDisplay.get()).toBe('T:000001');
-        }));
-
-        it('should elapse grovtid into minutes as time passes', inject(function(smallDisplay) {
-            // when
-            jasmine.clock().tick(60 * 1000);
-
-            // then
-            expect(smallDisplay.get()).toBe('T:000100');
-        }));
-
-        it('should elapse grovtid into hours as time passes', inject(function(smallDisplay) {
-            // when
-            jasmine.clock().tick(60 * 60 * 1000);
-
-            // then
-            expect(smallDisplay.get()).toBe('T:010000');
-        }));
-
         describe('editing', function () {
 
             beforeEach(inject(function(keyboard) {
