@@ -69,6 +69,56 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
                 expect(smallDisplay.getCursor()).toEqual(7);
                 expect(smallDisplay.getBlinking()).toEqual(7);
             }));
+
+            it('radera blinkande tecken', inject(function (keyboard, smallDisplay) {
+                keyboard.trigger('4');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('123');
+                keyboard.trigger('DEL');
+
+                expect(smallDisplay.toString()).toBe('FR:123  ');
+                expect(smallDisplay.getCursor()).toEqual(5);
+                expect(smallDisplay.getBlinking()).toEqual(5);
+
+                keyboard.trigger('DEL');
+
+                expect(smallDisplay.toString()).toBe('FR:12   ');
+                expect(smallDisplay.getCursor()).toEqual(4);
+                expect(smallDisplay.getBlinking()).toEqual(4);
+            }));
+
+            it('cannot delete nothing', inject(function (keyboard, smallDisplay) {
+                keyboard.trigger('4');
+                keyboard.trigger('ÄND');
+                keyboard.trigger('DEL');
+                keyboard.triggerMany('1');
+
+                expect(smallDisplay.toString()).toBe('FR:1    ');
+                expect(smallDisplay.getCursor()).toEqual(4);
+                expect(smallDisplay.getBlinking()).toEqual(4);
+            }));
+
+            it('radera blinkande tecken i flerradig funktion', inject(function (keyboard, largeDisplay) {
+                keyboard.trigger('FMT');
+                keyboard.triggerMany('100');
+                keyboard.trigger('⏎');
+                keyboard.trigger('⏎');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('CR1');
+                keyboard.trigger('DEL');
+
+                expect(largeDisplay.toString()).toBe('TILL:CR1        ');
+                expect(largeDisplay.getCursor()).toEqual(7);
+                expect(largeDisplay.getBlinking()).toEqual(7);
+
+                keyboard.trigger('DEL');
+
+                expect(largeDisplay.toString()).toBe('TILL:CR         ');
+                expect(largeDisplay.getCursor()).toEqual(6);
+                expect(largeDisplay.getBlinking()).toEqual(6);
+            }));
         });
 
         describe('text (inställningar) med ett blinkande kolon som skiljetecken', function () {
