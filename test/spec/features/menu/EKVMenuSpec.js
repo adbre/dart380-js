@@ -155,5 +155,19 @@ describe("EKV", function() {
             expect(smallDisplay.toString()).toBe('        ');
         }));
 
+        it("should NOT edit message", inject(function (keyboard, largeDisplay, smallDisplay) {
+
+            // given
+            keyboard.trigger('EKV');
+
+            // when
+            keyboard.trigger('ÄND');
+            keyboard.triggerMany('202634');
+
+            // then
+            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(smallDisplay.toString()).toBe('FRI*TEXT');
+        }));
+
     });
 });

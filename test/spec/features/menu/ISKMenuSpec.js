@@ -161,5 +161,69 @@ describe("ISK", function() {
             expect(smallDisplay.toString()).toBe('        ');
         }));
 
+        it("should edit message", inject(function (keyboard, largeDisplay, smallDisplay) {
+
+            // given
+            keyboard.trigger('ISK');
+
+            // when
+            keyboard.trigger('ÄND');
+            keyboard.triggerMany('202634');
+
+            // then
+            expect(largeDisplay.toString()).toBe('202634*FR:CR    ');
+            expect(smallDisplay.toString()).toBe('FRI*TEXT');
+        }));
+
+        it("should save message after edit", inject(function (keyboard, largeDisplay, smallDisplay) {
+
+            // given
+            keyboard.trigger('ISK');
+
+            // when
+            keyboard.trigger('ÄND');
+            keyboard.triggerMany('202634');
+            keyboard.trigger('SLT');
+            keyboard.trigger('SLT');
+            keyboard.trigger('ISK');
+
+            // then
+            expect(largeDisplay.toString()).toBe('202634*FR:CR    ');
+            expect(smallDisplay.toString()).toBe('FRI*TEXT');
+        }));
+
+        it("should preserve selected row when closing edit", inject(function (keyboard, largeDisplay, smallDisplay) {
+
+            // given
+            keyboard.trigger('ISK');
+
+            // when
+            keyboard.trigger('ÄND');
+            keyboard.trigger('↓');
+            keyboard.trigger('↓');
+            keyboard.trigger('↓');
+            keyboard.trigger('SLT');
+
+            // then
+            expect(largeDisplay.toString()).toBe('TEXT:THE QUICK B');
+            expect(smallDisplay.toString()).toBe('FRI*TEXT');
+        }));
+
+        it("should return to ISK menu when closing edit", inject(function (keyboard, largeDisplay, smallDisplay) {
+
+            // given
+            keyboard.trigger('ISK');
+
+            // when
+            keyboard.trigger('ÄND');
+            keyboard.triggerMany('202634');
+            keyboard.trigger('SLT');
+
+            // then
+            keyboard.trigger('RAD');
+            expect(largeDisplay.toString()).toBe('VILL DU RADERA? ');
+            expect(smallDisplay.toString()).toBe('FRI*TEXT');
+        }));
+
     });
 });
