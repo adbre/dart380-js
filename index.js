@@ -1,1 +1,1 @@
-module.exports = require('lib/Dart380');
+module.exports = require('./lib/Dart380');
