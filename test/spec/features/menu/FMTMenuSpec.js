@@ -499,58 +499,6 @@ describe("FMT", function() {
             expect(largeDisplay.getCursor()).toBe(12);
         }));
 
-        it("should delete character at current index", inject(function (keyboard, largeDisplay) {
-            // given
-            keyboard.trigger('FMT');
-            keyboard.triggerMany('100');
-            keyboard.trigger('⏎');
-            keyboard.trigger('⏎');
-            keyboard.trigger('ÄND'); // 'TILL:           '
-            keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // '000000*FR:      '
-            keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // 'FRÅN:     *U:   '
-            keyboard.trigger('⏎');   // 'TEXT:           '
-
-            keyboard.triggerMany('THE QUICK BROWN FOX JUMPS THE LAZY DOG.');
-                                    // 'TEXT:THE QUICK B'
-                                    // 'ROWN FOX JUMPS T'
-                                    // 'HE LAZY DOG.    '
-
-            // when
-            keyboard.trigger('DEL');
-            keyboard.trigger('DEL');
-
-            // then
-            expect(largeDisplay.toString()).toBe('HE LAZY DOG     ');
-            expect(largeDisplay.toString().substr(largeDisplay.getCursor(), 1)).toBe('G');
-        }));
-
-        it("should delete end of previous line", inject(function (keyboard, largeDisplay) {
-            // given
-            keyboard.trigger('FMT');
-            keyboard.triggerMany('100');
-            keyboard.trigger('⏎');
-            keyboard.trigger('⏎');
-            keyboard.trigger('ÄND'); // 'TILL:           '
-            keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // '000000*FR:      '
-            keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // 'FRÅN:     *U:   '
-            keyboard.trigger('⏎');   // 'TEXT:           '
-
-            keyboard.triggerMany('LOREM IPSUM');
-                                    // 'TEXT:LOREM IPSUM'
-
-            // when
-            keyboard.trigger('DEL');
-            keyboard.trigger('DEL');
-
-            // then
-            expect(largeDisplay.toString()).toBe('TEXT:LOREM IPSU ');
-            expect(largeDisplay.toString().substr(largeDisplay.getCursor(), 1)).toBe('U');
-        }));
-
         it("should move cursor to first writeable cell on UP", inject(function (keyboard, largeDisplay) {
             // given
             keyboard.trigger('FMT');

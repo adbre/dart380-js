@@ -70,24 +70,6 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
                 expect(smallDisplay.getBlinking()).toEqual(7);
             }));
 
-            it('radera blinkande tecken', inject(function (keyboard, smallDisplay) {
-                keyboard.trigger('4');
-                keyboard.trigger('ÄND');
-
-                keyboard.triggerMany('123');
-                keyboard.trigger('DEL');
-
-                expect(smallDisplay.toString()).toBe('FR:123  ');
-                expect(smallDisplay.getCursor()).toEqual(5);
-                expect(smallDisplay.getBlinking()).toEqual(5);
-
-                keyboard.trigger('DEL');
-
-                expect(smallDisplay.toString()).toBe('FR:12   ');
-                expect(smallDisplay.getCursor()).toEqual(4);
-                expect(smallDisplay.getBlinking()).toEqual(4);
-            }));
-
             it('cannot delete nothing', inject(function (keyboard, smallDisplay) {
                 keyboard.trigger('4');
                 keyboard.trigger('ÄND');
@@ -99,7 +81,7 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
                 expect(smallDisplay.getBlinking()).toEqual(4);
             }));
 
-            it('radera blinkande tecken i flerradig funktion', inject(function (keyboard, largeDisplay) {
+            it('ÄND raderar teckenvis', inject(function (keyboard, largeDisplay) {
                 keyboard.trigger('FMT');
                 keyboard.triggerMany('100');
                 keyboard.trigger('⏎');
@@ -107,15 +89,89 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
                 keyboard.trigger('ÄND');
 
                 keyboard.triggerMany('CR1');
+                keyboard.trigger('←');
+                keyboard.trigger('ÄND');
+
+                expect(largeDisplay.toString()).toBe('TILL:C1         ');
+                expect(largeDisplay.getCursor()).toEqual(6);
+                expect(largeDisplay.getBlinking()).toEqual(6);
+
+                keyboard.trigger('ÄND');
+
+                expect(largeDisplay.toString()).toBe('TILL:1          ');
+                expect(largeDisplay.getCursor()).toEqual(5);
+                expect(largeDisplay.getBlinking()).toEqual(5);
+            }));
+
+            it('ÄND raderar teckenvis i enraddiga funktioner', inject(function (keyboard, smallDisplay) {
+                keyboard.trigger('1');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('123');
+                keyboard.trigger('ÄND');
+
+                expect(smallDisplay.toString()).toBe('T:12    ');
+
+                keyboard.trigger('ÄND');
+
+                expect(smallDisplay.toString()).toBe('T:1     ');
+            }));
+
+            it('DEL raderar blinkande tecken i enraddiga funktioner', inject(function (keyboard, smallDisplay) {
+                keyboard.trigger('1');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('112233');
                 keyboard.trigger('DEL');
 
-                expect(largeDisplay.toString()).toBe('TILL:CR1        ');
-                expect(largeDisplay.getCursor()).toEqual(7);
-                expect(largeDisplay.getBlinking()).toEqual(7);
+                expect(smallDisplay.toString()).toBe('T:11223 ');
 
                 keyboard.trigger('DEL');
 
-                expect(largeDisplay.toString()).toBe('TILL:CR         ');
+                expect(smallDisplay.toString()).toBe('T:11223 ');
+            }));
+
+            it('DEL flyttar inte blinkande tecken', inject(function (keyboard, largeDisplay) {
+                keyboard.trigger('FMT');
+                keyboard.triggerMany('100');
+                keyboard.trigger('⏎');
+                keyboard.trigger('⏎');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('CR1');
+                keyboard.trigger('←');
+                keyboard.trigger('←');
+                keyboard.trigger('DEL');
+
+                expect(largeDisplay.toString()).toBe('TILL:C1         ');
+                expect(largeDisplay.getCursor()).toEqual(6);
+                expect(largeDisplay.getBlinking()).toEqual(6);
+
+                keyboard.trigger('DEL');
+
+                expect(largeDisplay.toString()).toBe('TILL:C          ');
+                expect(largeDisplay.getCursor()).toEqual(6);
+                expect(largeDisplay.getBlinking()).toEqual(6);
+            }));
+
+            it('DEL raderar blinkande tecken', inject(function (keyboard, largeDisplay) {
+                keyboard.trigger('FMT');
+                keyboard.triggerMany('100');
+                keyboard.trigger('⏎');
+                keyboard.trigger('⏎');
+                keyboard.trigger('ÄND');
+
+                keyboard.triggerMany('ABC');
+                keyboard.trigger('←');
+                keyboard.trigger('←');
+
+                expect(largeDisplay.toString()).toBe('TILL:ABC        ');
+                expect(largeDisplay.getCursor()).toEqual(6);
+                expect(largeDisplay.getBlinking()).toEqual(6);
+
+                keyboard.trigger('DEL');
+
+                expect(largeDisplay.toString()).toBe('TILL:AC         ');
                 expect(largeDisplay.getCursor()).toEqual(6);
                 expect(largeDisplay.getBlinking()).toEqual(6);
             }));
