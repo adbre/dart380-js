@@ -88,6 +88,43 @@ describe("communication", function() {
             ]);
         }));
 
+        it('should print message from EKV', inject(function (keyboard, messages, communication, mockPrinter) {
+            // given
+            var message = messages.createMessage('100');
+            message.setSender('RG');
+            message.setRecipent('CR');
+            message.setTimestamp('172400');
+            message.setText('THE QUICK BROWN FOX JUMPS THE LAZY DOG.');
+
+            // when
+            communication.receive(message.toArray());
+            keyboard.trigger('EKV');
+            keyboard.trigger('SKR');
+
+            // then
+            expect(mockPrinter.mostRecent()).toBeDefined();
+            expect(mockPrinter.mostRecent().message.toArray()).toEqual([
+                'FRI*TEXT*       ',
+                'TILL:CR         ',
+                '                ',
+                '172400*FR:RG    ',
+                '                ',
+                'FRÅN:     *U:   ',
+                'TEXT:THE QUICK B',
+                'ROWN FOX JUMPS T',
+                'HE LAZY DOG.    ',
+                '                ',
+                '                ',
+                '                ',
+                '                ',
+                '                ',
+                '                ',
+                '                ',
+                '                ',
+                '------SLUT------',
+            ]);
+        }));
+
         it('should NOT auto-print message when sending', inject(function (keyboard, mockPrinter) {
             // given
             createFmt100('RG', 'THE QUICK BROWN FOX JUMPS THE LAZY DOG.');
