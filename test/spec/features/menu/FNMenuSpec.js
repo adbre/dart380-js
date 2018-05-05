@@ -33,7 +33,7 @@ describe("F1-F4", function() {
             keyboard.trigger('ÄND');
             keyboard.triggerMany(to);
             keyboard.trigger('⏎'); // (empty)
-            keyboard.trigger('⏎'); // 000000*FR:
+            keyboard.trigger('⏎'); // 010000*FR:
             if (tnr) {
                 keyboard.triggerMany(tnr);
             }
@@ -58,7 +58,7 @@ describe("F1-F4", function() {
         keyboard.trigger('F1');
 
         // then
-        expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -70,7 +70,7 @@ describe("F1-F4", function() {
         keyboard.trigger('F2');
 
         // then
-        expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -82,7 +82,7 @@ describe("F1-F4", function() {
         keyboard.trigger('F3');
 
         // then
-        expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -94,7 +94,7 @@ describe("F1-F4", function() {
         keyboard.trigger('F4');
 
         // then
-        expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -116,7 +116,7 @@ describe("F1-F4", function() {
         // then
         keyboard.trigger('SLT');
         keyboard.trigger('F2');
-        expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 });

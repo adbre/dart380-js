@@ -247,7 +247,7 @@ describe("FMT", function() {
 
         keyboard.trigger('⏎');
 
-        expect(largeDisplay.toString()).toBe('000000*FR:      ');
+        expect(largeDisplay.toString()).toBe('010000*FR:      ');
 
         keyboard.trigger('⏎');
 
@@ -293,7 +293,7 @@ describe("FMT", function() {
         keyboard.trigger('⏎'); //       *FR:
 
         // then
-        expect(largeDisplay.toString()).toBe('232547*FR:      ');
+        expect(largeDisplay.toString()).toBe('012325*FR:      ');
     }));
 
     it("should auto wrap lines", inject(function (keyboard, largeDisplay, smallDisplay) {
@@ -420,7 +420,7 @@ describe("FMT", function() {
         keyboard.trigger('⏎');
 
         // then
-        expect(largeDisplay.toString()).toBe('000000*FR:VJ    ');
+        expect(largeDisplay.toString()).toBe('010000*FR:VJ    ');
     }));
 
     it("should automatically enter timestamp", inject(function (keyboard, largeDisplay) {
@@ -440,7 +440,7 @@ describe("FMT", function() {
         keyboard.trigger('⏎');
         keyboard.trigger('⏎');
 
-        expect(largeDisplay.toString()).toBe('123456*FR:      ');
+        expect(largeDisplay.toString()).toBe('011234*FR:      ');
     }));
 
     describe('entering FMT number', function () {
@@ -480,7 +480,7 @@ describe("FMT", function() {
             keyboard.trigger('⏎');
             keyboard.trigger('ÄND'); // 'TILL:           '
             keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // '000000*FR:      '
+            keyboard.trigger('⏎');   // '010000*FR:      '
             keyboard.trigger('⏎');   // '                '
             keyboard.trigger('⏎');   // 'FRÅN:     *U:   '
             keyboard.trigger('⏎');   // 'TEXT:           '
@@ -507,7 +507,7 @@ describe("FMT", function() {
             keyboard.trigger('⏎');
             keyboard.trigger('ÄND'); // 'TILL:           '
             keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // '000000*FR:      '
+            keyboard.trigger('⏎');   // '010000*FR:      '
             keyboard.trigger('⏎');   // '                '
             keyboard.trigger('⏎');   // 'FRÅN:     *U:   '
             keyboard.trigger('⏎');   // 'TEXT:           '
@@ -531,7 +531,7 @@ describe("FMT", function() {
             keyboard.trigger('⏎');
             keyboard.trigger('ÄND'); // 'TILL:           '
             keyboard.trigger('⏎');   // '                '
-            keyboard.trigger('⏎');   // '000000*FR:      '
+            keyboard.trigger('⏎');   // '010000*FR:      '
             keyboard.trigger('⏎');   // '                '
             keyboard.trigger('⏎');   // 'FRÅN:     *U:   '
             keyboard.trigger('⏎');   // 'TEXT:           '

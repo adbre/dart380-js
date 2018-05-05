@@ -344,7 +344,7 @@ describe("Teckenfönster (Ra180/480 instruktionsbok utdrag) s.12", function() {
                     keyboard.trigger('0');
 
                     // then
-                    expect(largeDisplay.toString()).toEqual('000000*FR:      ');
+                    expect(largeDisplay.toString()).toEqual('010000*FR:      ');
                     expect(smallDisplay.toString()).toEqual('FRI*TEXT');
                 }));
 

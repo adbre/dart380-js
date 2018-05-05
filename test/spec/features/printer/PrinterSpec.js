@@ -33,7 +33,7 @@ describe("communication", function() {
             keyboard.trigger('ÄND');
             keyboard.triggerMany(to);
             keyboard.trigger('⏎'); // (empty)
-            keyboard.trigger('⏎'); // 000000*FR:
+            keyboard.trigger('⏎'); // 010000*FR:
             if (tnr) {
                 keyboard.triggerMany(tnr);
             }
@@ -70,7 +70,7 @@ describe("communication", function() {
                 'FRI*TEXT*       ',
                 'TILL:RG         ',
                 '                ',
-                '000000*FR:CR    ',
+                '010000*FR:CR    ',
                 '                ',
                 'FRÅN:     *U:   ',
                 'TEXT:THE QUICK B',
@@ -227,7 +227,7 @@ describe("communication", function() {
                 'FRI*TEXT*       ',
                 'TILL:RG         ',
                 '                ',
-                '000000*FR:CR    ',
+                '010000*FR:CR    ',
                 '                ',
                 'FRÅN:     *U:   ',
                 'TEXT:THE QUICK B',

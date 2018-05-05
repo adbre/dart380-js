@@ -40,7 +40,7 @@ describe("ISK", function() {
             keyboard.trigger('ÄND');
             keyboard.triggerMany(to);
             keyboard.trigger('⏎'); // (empty)
-            keyboard.trigger('⏎'); // 000000*FR:
+            keyboard.trigger('⏎'); // 010000*FR:
             if (tnr) {
                 keyboard.triggerMany(tnr);
             }
@@ -73,7 +73,7 @@ describe("ISK", function() {
             keyboard.trigger('ISK');
 
             // then
-            expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -86,7 +86,7 @@ describe("ISK", function() {
             keyboard.trigger('REP');
 
             // then
-            expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -99,7 +99,7 @@ describe("ISK", function() {
             keyboard.trigger('KVI');
 
             // then
-            expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -168,10 +168,10 @@ describe("ISK", function() {
 
             // when
             keyboard.trigger('ÄND');
-            keyboard.triggerMany('202634');
+            keyboard.triggerMany('312234');
 
             // then
-            expect(largeDisplay.toString()).toBe('202634*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('312234*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -182,13 +182,13 @@ describe("ISK", function() {
 
             // when
             keyboard.trigger('ÄND');
-            keyboard.triggerMany('202634');
+            keyboard.triggerMany('312234');
             keyboard.trigger('SLT');
             keyboard.trigger('SLT');
             keyboard.trigger('ISK');
 
             // then
-            expect(largeDisplay.toString()).toBe('202634*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('312234*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -216,7 +216,7 @@ describe("ISK", function() {
 
             // when
             keyboard.trigger('ÄND');
-            keyboard.triggerMany('202634');
+            keyboard.triggerMany('312234');
             keyboard.trigger('SLT');
 
             // then

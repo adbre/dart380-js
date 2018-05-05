@@ -33,7 +33,7 @@ describe("ISK", function() {
             keyboard.trigger('ÄND');
             keyboard.triggerMany(to);
             keyboard.trigger('⏎'); // (empty)
-            keyboard.trigger('⏎'); // 000000*FR:
+            keyboard.trigger('⏎'); // 010000*FR:
             if (tnr) {
                 keyboard.triggerMany(tnr);
             }
@@ -61,7 +61,7 @@ describe("ISK", function() {
         keyboard.trigger('ISK');
 
         // then
-        expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -250,7 +250,7 @@ describe("ISK", function() {
         keyboard.trigger('ISK');
 
         // then
-        expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -267,7 +267,7 @@ describe("ISK", function() {
         mockCommunication.mostRecent().complete();
 
         // then
-        expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -284,7 +284,7 @@ describe("ISK", function() {
         mockCommunication.mostRecent().error();
 
         // then
-        expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -405,7 +405,7 @@ describe("ISK", function() {
         keyboard.trigger('AVS');
 
         // then
-        expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+        expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
@@ -446,7 +446,7 @@ describe("ISK", function() {
             keyboard.trigger('ISK');
 
             // then
-            expect(largeDisplay.toString()).toBe('160542*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221605*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -461,7 +461,7 @@ describe("ISK", function() {
             keyboard.trigger('⏎');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -476,7 +476,7 @@ describe("ISK", function() {
             keyboard.trigger('▽');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -492,7 +492,7 @@ describe("ISK", function() {
             keyboard.trigger('△');
 
             // then
-            expect(largeDisplay.toString()).toBe('160542*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221605*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -508,7 +508,7 @@ describe("ISK", function() {
             keyboard.trigger('▽');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -527,7 +527,7 @@ describe("ISK", function() {
             keyboard.trigger('△');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:CR    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
     });

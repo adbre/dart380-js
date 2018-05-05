@@ -30,7 +30,7 @@ describe("communication", function() {
             keyboard.trigger('ÄND');
             keyboard.triggerMany(to);
             keyboard.trigger('⏎'); // (empty)
-            keyboard.trigger('⏎'); // 000000*FR:
+            keyboard.trigger('⏎'); // 010000*FR:
             if (tnr) {
                 keyboard.triggerMany(tnr);
             }
@@ -56,7 +56,7 @@ describe("communication", function() {
             'FRI*TEXT*       ',
             'TILL:CR         ',
             '                ',
-            '154012*FR:RG    ',
+            '221540*FR:RG    ',
             '                ',
             'FRÅN:     *U:   ',
             'TEXT:LOREM IPSUM',
@@ -91,7 +91,7 @@ describe("communication", function() {
             keyboard.trigger('EKV');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:RG    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -160,7 +160,7 @@ describe("communication", function() {
             keyboard.trigger('EKV');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:RG    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -173,7 +173,7 @@ describe("communication", function() {
             keyboard.trigger('EKV');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:RG    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -199,7 +199,7 @@ describe("communication", function() {
             keyboard.trigger('EKV');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:RG    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -224,7 +224,7 @@ describe("communication", function() {
             keyboard.trigger('EKV');
 
             // then
-            expect(largeDisplay.toString()).toBe('154012*FR:RG    ');
+            expect(largeDisplay.toString()).toBe('221540*FR:RG    ');
             expect(smallDisplay.toString()).toBe('FRI*TEXT');
         }));
 
@@ -245,7 +245,7 @@ describe("communication", function() {
                     'FRI*TEXT*       ',
                     'TILL:RG         ',
                     '                ',
-                    '154012*FR:CR    ',
+                    '221540*FR:CR    ',
                     '                ',
                     'FRÅN:     *U:   ',
                     'TEXT:LOREM IPSUM',
@@ -268,7 +268,7 @@ describe("communication", function() {
                 expect(mockCommunication.mostRecent().message.getHeaderArray()).toEqual([
                     'TILL:RG         ',
                     '                ',
-                    '154012*FR:CR    ',
+                    '221540*FR:CR    ',
                     '                ',
                     'FRÅN:     *U:   '
                 ]);
@@ -297,7 +297,7 @@ describe("communication", function() {
                     'FRI*TEXT*       ',
                     'TILL:RG         ',
                     '                ',
-                    '154012*FR:CR    ',
+                    '221540*FR:CR    ',
                     '                ',
                     'FRÅN:     *U:   ',
                     'TEXT:LOREM IPSUM',
@@ -322,7 +322,7 @@ describe("communication", function() {
 
             it('should define .getTimestamp()', inject(function (mockCommunication) {
                 // then
-                expect(mockCommunication.mostRecent().message.getTimestamp()).toBe('154012');
+                expect(mockCommunication.mostRecent().message.getTimestamp()).toBe('221540');
             }));
 
             it('should define .getSender()', inject(function (mockCommunication) {

@@ -116,7 +116,7 @@ describe("EKV", function() {
             expect(largeDisplay.toString()).toBe('                ');
 
             keyboard.trigger('⏎');
-            expect(largeDisplay.toString()).toBe('120000*FR:CR    ');
+            expect(largeDisplay.toString()).toBe('011200*FR:CR    ');
 
             keyboard.trigger('⏎');
             expect(largeDisplay.toString()).toBe('                ');
