@@ -71,5 +71,5 @@ function cleanup() {
   DART380_JS.destroy();
 }
 
-module.exports.bootstrapDart380 = (window || global).bootstrapDart380 = bootstrapDart380;
-module.exports.inject = (window || global).inject = inject;
+module.exports.bootstrapDart380 = globalThis.bootstrapDart380 = bootstrapDart380;
+module.exports.inject = globalThis.inject = inject;

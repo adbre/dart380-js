@@ -1,13 +1,11 @@
 {
   "name": "dart380-js",
-  "version": "0.1.0",
-  "description": "A ",
+  "version": "0.2.0",
+  "description": "Javascript implementation of the Ericsson Dart 380",
   "main": "index.js",
   "scripts": {
-    "all": "grunt",
-    "dev": "grunt auto-test",
-    "distro": "grunt auto-build",
-    "test": "grunt test"
+    "test": "vitest run",
+    "dev": "vitest"
   },
   "author": {
     "name": "Adam Brengesjö",
@@ -15,36 +13,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^13.0.1",
-    "grunt": "^1.0.1",
-    "grunt-browser-sync": "^2.2.0",
-    "grunt-browserify": "^5.0.0",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-karma": "^2.0.0",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.1.0",
-    "karma-browserify": "^5.0.5",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-env-preprocessor": "^0.1.1",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-jasmine-html-reporter": "^0.2.0",
-    "karma-jasmine-matchers": "^2.0.2",
-    "karma-phantomjs-launcher": "^1.0.1",
-    "karma-requirejs": "^1.0.0",
-    "karma-safari-launcher": "^1.0.0",
-    "karma-spec-reporter": "0.0.26",
-    "load-grunt-tasks": "^3.5.0",
-    "phantomjs": "^1.9.8",
-    "requirejs": "^2.2.0",
-    "watchify": "^3.7.0"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "didi": "^0.1.1",
-    "inherits": "^2.0.1",
-    "lodash": "^4.13.1",
-    "sprintf-js": "^1.0.3"
+    "inherits": "^2.0.4",
+    "lodash": "^4.17.21",
+    "sprintf-js": "^1.1.3"
   }
 }

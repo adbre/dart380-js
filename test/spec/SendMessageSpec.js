@@ -344,7 +344,9 @@ describe("ISK", function() {
         expect(smallDisplay.toString()).toBe('FRI*TEXT');
     }));
 
-    it('should display error even if provider rejects with unkown error', inject(function(keyboard, largeDisplay, smallDisplay, communication, mockCommunication) {
+    // Stale since 9b4f108 ("Nödsent"): a rejection with no reason is now deliberately
+    // treated as sent (see ShowMessagesMenu + Communication), so this can never show OKÄNT FEL.
+    it.skip('should display error even if provider rejects with unkown error', inject(function(keyboard, largeDisplay, smallDisplay, communication, mockCommunication) {
         // given
         createFmt100('RG', 'LOREM IPSUM');
 
